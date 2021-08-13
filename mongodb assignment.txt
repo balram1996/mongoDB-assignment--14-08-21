@@ -1,0 +1,174 @@
+Microsoft Windows [Version 10.0.19043.1110]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\kurmi>mongo
+MongoDB shell version v5.0.2
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("8abc3ca9-baa9-4d94-a1bc-347ba31892fb") }
+MongoDB server version: 5.0.2
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+We recommend you begin using "mongosh".
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2021-08-13T23:17:19.204+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs
+admin       0.000GB
+assignment  0.000GB
+config      0.000GB
+local       0.000GB
+web_10_10   0.000GB
+> use assignment
+switched to db assignment
+>
+>
+> db.users.insert({first_name:"anurag",last_name:"yadav"})
+WriteResult({ "nInserted" : 1 })
+> show collection
+uncaught exception: Error: don't know how to show [collection] :
+shellHelper.show@src/mongo/shell/utils.js:1211:11
+shellHelper@src/mongo/shell/utils.js:838:15
+@(shellhelp2):1:1
+>
+> show collections
+users
+> db.users.find({})
+{ "_id" : ObjectId("6116cd15b6a6dc77aa9fa7cd"), "first_name" : "Balram", "last_name" : "Kurmi", "email" : "kurmibalram2000@gmail.com", "gender" : "male", "ip-addredd" : "127.0.0.1" }
+{ "_id" : ObjectId("6116d8695b386ba360a4ad9e"), "first_name" : "anurag", "last_name" : "yadav" }
+>
+> db.users.insertMany({first_name:"shivani",last_name:"patel",email:"shivshivani2000@gmail.com"})
+uncaught exception: TypeError: documents.map is not a function :
+DBCollection.prototype.insertMany@src/mongo/shell/crud_api.js:307:17
+@(shell):1:1
+>
+> db.users.insertMany([{first_name:"shivani",last_name:"pate",email:"shivshivani05@gmail.com"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6116d9345b386ba360a4ad9f")
+        ]
+}
+> db.users.insertMany([{first_name:"ayush",last_name:"patel",email:"aasupatel05@gmail.com"},{first_name:"vardan",last_name:"gour",email:"badri1998@gmail.com"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6116d9a95b386ba360a4ada0"),
+                ObjectId("6116d9a95b386ba360a4ada1")
+        ]
+}
+>
+> db.users.find({})
+{ "_id" : ObjectId("6116cd15b6a6dc77aa9fa7cd"), "first_name" : "Balram", "last_name" : "Kurmi", "email" : "kurmibalram2000@gmail.com", "gender" : "male", "ip-addredd" : "127.0.0.1" }
+{ "_id" : ObjectId("6116d8695b386ba360a4ad9e"), "first_name" : "anurag", "last_name" : "yadav" }
+{ "_id" : ObjectId("6116d9345b386ba360a4ad9f"), "first_name" : "shivani", "last_name" : "pate", "email" : "shivshivani05@gmail.com" }
+{ "_id" : ObjectId("6116d9a95b386ba360a4ada0"), "first_name" : "ayush", "last_name" : "patel", "email" : "aasupatel05@gmail.com" }
+{ "_id" : ObjectId("6116d9a95b386ba360a4ada1"), "first_name" : "vardan", "last_name" : "gour", "email" : "badri1998@gmail.com" }
+>
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("6116cd15b6a6dc77aa9fa7cd"),
+        "first_name" : "Balram",
+        "last_name" : "Kurmi",
+        "email" : "kurmibalram2000@gmail.com",
+        "gender" : "male",
+        "ip-addredd" : "127.0.0.1"
+}
+{
+        "_id" : ObjectId("6116d8695b386ba360a4ad9e"),
+        "first_name" : "anurag",
+        "last_name" : "yadav"
+}
+{
+        "_id" : ObjectId("6116d9345b386ba360a4ad9f"),
+        "first_name" : "shivani",
+        "last_name" : "pate",
+        "email" : "shivshivani05@gmail.com"
+}
+{
+        "_id" : ObjectId("6116d9a95b386ba360a4ada0"),
+        "first_name" : "ayush",
+        "last_name" : "patel",
+        "email" : "aasupatel05@gmail.com"
+}
+{
+        "_id" : ObjectId("6116d9a95b386ba360a4ada1"),
+        "first_name" : "vardan",
+        "last_name" : "gour",
+        "email" : "badri1998@gmail.com"
+}
+>
+> db.users.findOne()
+{
+        "_id" : ObjectId("6116cd15b6a6dc77aa9fa7cd"),
+        "first_name" : "Balram",
+        "last_name" : "Kurmi",
+        "email" : "kurmibalram2000@gmail.com",
+        "gender" : "male",
+        "ip-addredd" : "127.0.0.1"
+}
+>
+> db.users.findOne({first_name:"shivani"})
+{
+        "_id" : ObjectId("6116d9345b386ba360a4ad9f"),
+        "first_name" : "shivani",
+        "last_name" : "pate",
+        "email" : "shivshivani05@gmail.com"
+}
+>
+> db.users.update({last_name:"pate"},{$set:{last_name:"patel"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.users,findOne({first_name:"shivani"})
+uncaught exception: ReferenceError: findOne is not defined :
+@(shell):1:10
+> db.users.findOne({first_name:"shivani"})
+{
+        "_id" : ObjectId("6116d9345b386ba360a4ad9f"),
+        "first_name" : "shivani",
+        "last_name" : "patel",
+        "email" : "shivshivani05@gmail.com"
+}
+>
+> db.users.remove({last_name:"patel"})
+WriteResult({ "nRemoved" : 2 })
+> db.users.find({})
+{ "_id" : ObjectId("6116cd15b6a6dc77aa9fa7cd"), "first_name" : "Balram", "last_name" : "Kurmi", "email" : "kurmibalram2000@gmail.com", "gender" : "male", "ip-addredd" : "127.0.0.1" }
+{ "_id" : ObjectId("6116d8695b386ba360a4ad9e"), "first_name" : "anurag", "last_name" : "yadav" }
+{ "_id" : ObjectId("6116d9a95b386ba360a4ada1"), "first_name" : "vardan", "last_name" : "gour", "email" : "badri1998@gmail.com" }
+> db.users.deleteMany({email})
+uncaught exception: ReferenceError: email is not defined :
+@(shell):1:22
+> db.users.insert({first_name:"anurag"})
+WriteResult({ "nInserted" : 1 })
+>
+> db.users.deleteMany({first_name:"anurag"})
+{ "acknowledged" : true, "deletedCount" : 2 }
+> db.users.find({})
+{ "_id" : ObjectId("6116cd15b6a6dc77aa9fa7cd"), "first_name" : "Balram", "last_name" : "Kurmi", "email" : "kurmibalram2000@gmail.com", "gender" : "male", "ip-addredd" : "127.0.0.1" }
+{ "_id" : ObjectId("6116d9a95b386ba360a4ada1"), "first_name" : "vardan", "last_name" : "gour", "email" : "badri1998@gmail.com" }
+>
+>
+> db.users.drop()
+true
+> show dbs
+admin      0.000GB
+config     0.000GB
+local      0.000GB
+web_10_10  0.000GB
+>
